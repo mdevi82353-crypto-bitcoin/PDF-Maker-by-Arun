@@ -18,6 +18,7 @@ jobs:
           cp src/main.dart lib/main.dart
           cp src/pubspec.yaml pubspec.yaml
           sed -i 's/android:label="[^"]*"/android:label="PDF Maker By Arun"/' android/app/src/main/AndroidManifest.xml
+          sed -i 's/flutter.compileSdkVersion/36/' android/app/build.gradle*
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
