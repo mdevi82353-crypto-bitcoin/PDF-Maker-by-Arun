@@ -18,6 +18,12 @@ jobs:
           cp src/main.dart lib/main.dart
           cp src/pubspec.yaml pubspec.yaml
           sed -i 's/android:label="[^"]*"/android:label="PDF Maker By Arun"/' android/app/src/main/AndroidManifest.xml
+      - name: Fixed signing key (agar debug.keystore repo me hai)
+        run: |
+          if [ -f debug.keystore ]; then
+            mkdir -p ~/.android
+            cp debug.keystore ~/.android/debug.keystore
+          fi
       - name: Force compileSdk 36 for all plugins
         run: |
           mkdir -p ~/.gradle/init.d
@@ -32,7 +38,7 @@ jobs:
           }
           EOF
       - run: flutter pub get
-      - run: flutter build apk --release
+      - run: flutter build apk --release --no-shrink
       - uses: actions/upload-artifact@v4
         with:
           name: PDF-Maker-By-Arun
