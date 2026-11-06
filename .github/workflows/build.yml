@@ -36,8 +36,8 @@ jobs:
               }
             }
           }
-          EOF
-                - name: Add ML Kit Chinese class required by R8
+          EOF 
+- name: Add ML Kit Chinese class required by R8
         run: |
           if [ -f android/app/build.gradle.kts ]; then
             printf '\ndependencies { implementation("com.google.mlkit:text-recognition-chinese:16.0.1") }\n' >> android/app/build.gradle.kts
