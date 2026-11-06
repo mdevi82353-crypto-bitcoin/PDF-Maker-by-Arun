@@ -46,8 +46,7 @@ jobs:
           else
             echo "Android app Gradle file not found"
             exit 1
-          fi
-      - run: flutter pub get
+          fi- run: flutter pub get run
       - run: flutter build apk --release --no-shrink
       - uses: actions/upload-artifact@v4
         with:
