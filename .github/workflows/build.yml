@@ -37,6 +37,16 @@ jobs:
             }
           }
           EOF
+                - name: Add ML Kit Chinese class required by R8
+        run: |
+          if [ -f android/app/build.gradle.kts ]; then
+            printf '\ndependencies { implementation("com.google.mlkit:text-recognition-chinese:16.0.1") }\n' >> android/app/build.gradle.kts
+          elif [ -f android/app/build.gradle ]; then
+            printf "\ndependencies { implementation 'com.google.mlkit:text-recognition-chinese:16.0.1' }\n" >> android/app/build.gradle
+          else
+            echo "Android app Gradle file not found"
+            exit 1
+          fi
       - run: flutter pub get
       - run: flutter build apk --release --no-shrink
       - uses: actions/upload-artifact@v4
